@@ -1,0 +1,337 @@
+.content {
+    margin: 8rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 4vw;
+    width: 60%;
+}
+
+.dish {
+    width: 15.5rem;
+    height: 13.6rem;
+    border-radius: 2.2rem;
+    text-align: center;
+}
+
+.grid-item {
+    display: grid;
+    background-color: var(--color-extra-4);
+    padding: 20px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2.2rem;
+    width: 15.5rem;
+    height: 20.5rem;
+}
+
+.grid-container {
+    margin-left: 10rem;
+    margin-right: 10rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 100px;
+    column-gap: 0px;
+}
+
+.separator {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--color-extra-2);
+    color: var(--color-extra-3);
+    border-top-right-radius: 2.2rem;
+    border-bottom-right-radius: 2.2rem;
+    margin-top: 8rem;
+    width: 60%;
+    font-size: clamp(var(--tamano-m), 2.5vw, var(--tamano-l));
+    font-weight: var(--fw-bk);
+}
+
+
+/*details page*/
+
+.grid-dcontainer {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 1%;
+    gap: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 0%;
+}
+
+.dish-detail {
+    background-color: var(--color-primary);
+    padding: 20px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.5rem;
+    width: 36.8rem;
+    height: 29rem;
+}
+
+.detail-text {
+    display: grid;
+    /*width: 20%;*/
+}
+
+.cart-icon-container {
+    display: flex;
+    left: 80%;
+}
+
+.text-card-container {
+    width: 100%;
+    height: 4rem;
+}
+
+.about-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.description-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 6vw auto;
+    width: 80vw;
+    height: 90vh;
+    box-shadow: 0 0 10px var(--color-primary);
+    max-height: 700px;
+}
+
+.description-image-container {
+    width: 50%;
+    height: 100%;
+    background-color: var(--color-primary);
+}
+
+.description-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    padding: 0;
+}
+
+.description-inner-text-container {
+    width: 80%;
+    height: 100%;
+    margin: 2rem auto;
+    padding: 0;
+}
+
+.hero-container {
+    background: var(--color-primary);
+    border-bottom-left-radius: 3.75rem;
+    border-bottom-right-radius: 3.75rem;
+    color: var(--color-background);
+    width: 100%;
+    height: 80%;
+    max-height: 864px;
+}
+
+.top-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.header-skull-container {
+    height: 100%;
+    width: 50vw;
+}
+
+.hero-title-container {
+    padding-top: 7vh;
+    padding-left: 7vw;
+
+}
+
+.hero-text-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2vw;
+    width: 50%;
+    height: 100%;
+}
+
+
+.hero-description-container {
+    padding-left: 11vw;
+    margin: 0;
+}
+
+.banner {
+    background: var(--color-primary) no-repeat;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 30vh;
+    border-bottom-left-radius: 3.75rem;
+    border-bottom-right-radius: 3.75rem;
+}
+
+.reversible-card-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: blue;
+}
+
+.reversible-card {
+    position: relative;
+    width: 300px;
+    height: 350px;
+}
+
+.reversible-card .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: 1s;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.reversible-card .front {
+    transform: perspective(600px) rotateY(0deg);
+    box-shadow: 0 5px 10px var(--color-primary);
+}
+
+.related-dishes-container {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.reversible-card .back {
+    transform: perspective(600px) rotateY(180deg);
+    color: var(--color-primary);
+    background: var(--color-b);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 5px 10px var(--color-primary);
+}
+
+.top-dishes {
+    margin: 8rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10vw;
+    width: 70%;
+}
+
+.reversible-card.flipcard .front {
+    transform: perspective(600px) rotateY(180deg);
+    
+}
+
+.reversible-card.flipcard .back {
+    transform: perspective(600px) rotateY(360deg);
+    
+}
+
+.dishes-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+.nav-bar {
+    background-color: var(--color-primary);
+    height: 6vh;
+    width: 100%;
+    margin: 0;
+    padding: 2vw 0;
+}
+.button-container {
+    padding-top: 4vw;
+    padding-left: 7vw;
+    margin: 0;
+}
+
+
+.footer-image-container{
+    height: 100%;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-right: 4vw ;
+}
+
+@media (max-width: 768px) {
+    .header-skull-container {
+      display: none;
+    }
+  
+    .hero-text-container {
+      width: 100%;
+    }
+  
+    .hero-title-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+    }
+    .hero-description-container {
+      margin: 0 auto;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+    }
+  
+    .button-container {
+      display: flex;
+      
+      padding-left: 0;
+      margin: 0 auto;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .content {
+      gap: 10vw;
+    }
+  
+    .description-container {
+      flex-direction: column;
+      max-width: 770px;
+    }
+  
+    .description-image-container {
+      height: 50%;
+      width: 100%;
+    }
+  
+    .description-text-container {
+      height: 50%;
+      width: 100%;
+   
+    }
+  
+    .description-inner-text-container {
+      width: 90%;
+    }
+  }
