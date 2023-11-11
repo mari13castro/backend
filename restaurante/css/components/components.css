@@ -51,6 +51,8 @@
     transform: translate(-50%, 0);
     border: none;
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
 }
 
 .cart-img {

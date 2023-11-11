@@ -94,9 +94,9 @@
     }
 
     //get and download images
-    foreach ($filenames as $index=>$image){
+    /*foreach ($filenames as $index=>$image){
         file_put_contents("../scraping/images/drinks/drink-".$image.".jpg", file_get_contents($image_urls[$index]));
-    }
+    }*/
 
     //insert info
     // Reference: https://medoo.in/api/insert
