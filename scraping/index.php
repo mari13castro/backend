@@ -95,7 +95,7 @@
 
     //get and download images
     /*foreach ($filenames as $index=>$image){
-        file_put_contents("../scraping/images/drinks/drink-".$image.".jpg", file_get_contents($image_urls[$index]));
+        file_put_contents("../scraping/images/dish-".$image.".jpg", file_get_contents($image_urls[$index]));
     }*/
 
     //insert info
