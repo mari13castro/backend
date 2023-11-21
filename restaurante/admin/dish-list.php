@@ -1,6 +1,6 @@
 <?php 
     require_once '../../database.php';
-    // Reference: https://medoo.in/api/select
+
     $items = $database->select("tb_dish_info","*");
 ?>
 <!DOCTYPE html>
@@ -14,10 +14,17 @@
 <body>
     <h2>All the Registered Dishes</h2>
     <table>
+        <thead>
+            <tr>
+                <td>Dish Long Name</td>
+                <td>ID Category</td>
+            </tr>
+        </thead>
         <?php
+
             foreach($items as $item){
-                echo "<tr>";
                 echo "<td>".$item["dish_lname"]."</td>";
+                echo "<td>".$item["id_categories"]."</td>";
                 echo "<td><a href='edit-dish.php?id=".$item["id_dish_info"]."'>Edit</a> <a href='delete-dish.php?id=".$item["id_dish_info"]."'>Delete</a></td>";
                 echo "</tr>";
             }
