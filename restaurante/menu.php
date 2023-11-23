@@ -84,7 +84,7 @@
         foreach($mains as $index => $main){
             echo "<section class='grid-item'>";
                 echo "<div class='dish-thumb'>";
-                    echo "<img class='dish' src='./imgs/main/".$main["dish_img"]."' alt='".$main["dish_lname"]."'>";
+                    echo "<img class='dish' src='./imgs/".$main["dish_img"]."' alt='".$main["dish_lname"]."'>";
                     echo "<span class='price'>$".$main["price"]."</span>";
                     echo "<a class='about-btn' href='details.php?id=".$main["id_dish_info"]."'>About</a>";
                 echo "</div>";
@@ -107,7 +107,7 @@
         foreach($desserts as $index => $dessert){
             echo "<section class='grid-item'>";
                 echo "<div class='dish-thumb'>";
-                    echo "<img class='dish' src='./imgs/desserts/".$dessert["dish_img"]."' alt='".$dessert["dish_lname"]."'>";
+                    echo "<img class='dish' src='./imgs/".$dessert["dish_img"]."' alt='".$dessert["dish_lname"]."'>";
                     echo "<span class='price'>$".$dessert["price"]."</span>";
                     echo "<a class='about-btn' href='details.php?id=".$dessert["id_dish_info"]."'>About</a>";
                     
@@ -132,7 +132,7 @@
         foreach($drinks as $index => $drink){
             echo "<section class='grid-item'>";
                 echo "<div class='dish-thumb'>";
-                    echo "<img class='dish' src='./imgs/drinks/".$drink["dish_img"]."' alt='".$drink["dish_lname"]."'>";
+                    echo "<img class='dish' src='./imgs/".$drink["dish_img"]."' alt='".$drink["dish_lname"]."'>";
                     echo "<span class='price'>$".$drink["price"]."</span>";
                     echo "<a class='about-btn' href='details.php?id=".$drink["id_dish_info"]."'>About</a>";
                 echo "</div>";
