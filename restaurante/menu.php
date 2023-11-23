@@ -2,23 +2,8 @@
     require_once '../database.php';
     // Reference: https://medoo.in/api/select
     
-    $items = $database->select("tb_dish_info",[
-        "[>]tb_quantity_people"=>["id_quantity_people" => "id_quantity_people"]
-    ],[
-        "tb_dish_info.id_dish_info",
-        "tb_dish_info.dish_lname",
-        "tb_dish_info.dish_sname",
-        "tb_dish_info.dish_img",
-        "tb_dish_info.dish_description",
-        "tb_dish_info.price",
-        "tb_quantity_people.quantity_category_name"
-    ]);
+    $categories = $database->select("tb_categories","*");
    
-    $mains = $database->select("tb_dish_info", "*", ["id_categories" => 1]);
-    $drinks = $database->select("tb_dish_info", "*", ["id_categories" => 2]);
-    $desserts = $database->select("tb_dish_info", "*", ["id_categories" => 3]);
-    $starters = $database->select("tb_dish_info", "*", ["id_categories" => 4]);
-
 ?>
 
 <!DOCTYPE html>
@@ -48,104 +33,50 @@
                 <li class="nav-text"><a class="nav-link" href="#">Contact Us</a></li>
                 <li class="nav-text"><a class="nav-link" href="#">Support</a></li>
             </ul>
-
             <h1 class="banner-title">Menu</h1>
         </div>
     </header>
 
-    <h1 class="separator">Starters</h1>
-    <section class="content">
-
     <?php 
-        foreach($starters as $index => $starter){
-            echo "<section class='grid-item'>";
-                echo "<div class='dish-thumb'>";
-                    echo "<img class='dish' src='./imgs/".$starter["dish_img"]."' alt='".$starter["dish_lname"]."'>";
-                    echo "<span class='price'>$".$starter["price"]."</span>";
-                    echo "<a class='about-btn' href='details.php?id=".$starter["id_dish_info"]."'>About</a>";
-                echo "</div>";
-                echo "<div class= 'text-card-container'>";
-                    echo "<p class='text-card'>".$starter["dish_sname"]."</p>";
-                echo "</div>";
-                echo "<div class='card-icon-container'>";
-                    echo "<img class='cart-img' src='./imgs/carrito_de_compras.png' alt='cart'>";
-                echo "</div>";
-            echo "</section>";
-        }
-    ?>
-    </section>
-    
-
-    <h1 class="separator">Main Dish</h1>
-
-    <section class="content">
-
-    <?php 
-        foreach($mains as $index => $main){
-            echo "<section class='grid-item'>";
-                echo "<div class='dish-thumb'>";
-                    echo "<img class='dish' src='./imgs/".$main["dish_img"]."' alt='".$main["dish_lname"]."'>";
-                    echo "<span class='price'>$".$main["price"]."</span>";
-                    echo "<a class='about-btn' href='details.php?id=".$main["id_dish_info"]."'>About</a>";
-                echo "</div>";
-                echo "<div class= 'text-card-container'>";
-                    echo "<p class='text-card'>".$main["dish_sname"]."</p>";
-                echo "</div>";
-                echo "<div class='card-icon-container'>";
-                    echo "<img class='cart-img' src='./imgs/carrito_de_compras.png' alt='cart'>";
-                echo "</div>";
-            echo "</section>";
-        }
-    ?>
-    </section>
-
-    <h1 class="separator">Desserts</h1>
-
-    <section class="content">
-    
-    <?php 
-        foreach($desserts as $index => $dessert){
-            echo "<section class='grid-item'>";
-                echo "<div class='dish-thumb'>";
-                    echo "<img class='dish' src='./imgs/".$dessert["dish_img"]."' alt='".$dessert["dish_lname"]."'>";
-                    echo "<span class='price'>$".$dessert["price"]."</span>";
-                    echo "<a class='about-btn' href='details.php?id=".$dessert["id_dish_info"]."'>About</a>";
+                foreach($categories as $category){
+                    echo "<h1 class='separator'>".$category["category_name"]."</h1>";
+                    echo "<section class='content'>";
                     
-                echo "</div>";
-                echo "<div class= 'text-card-container'>";
-                    echo "<p class='text-card'>".$dessert["dish_sname"]."</p>";
-                echo "</div>";
-                echo "<div class='card-icon-container'>";
-                    echo "<img class='cart-img' src='./imgs/carrito_de_compras.png' alt='cart'>";
-                echo "</div>";
-            echo "</section>";
-        }
-    ?>
-    </section>
-    
+                        //select destinations with the same category id/name
+                        $dishes = $database->select("tb_dish_info",[
+                            "[>]tb_quantity_people"=>["id_quantity_people" => "id_quantity_people"]
+                        ],[
+                                "tb_dish_info.id_dish_info",
+                                "tb_dish_info.dish_lname",
+                                "tb_dish_info.dish_sname",
+                                "tb_dish_info.dish_img",
+                                "tb_dish_info.dish_description",
+                                "tb_dish_info.price",
+                                "tb_quantity_people.quantity_category_name"
+                        ],[
+                            "tb_dish_info.id_categories" => $category["id_categories"]
+                        ]);
+                        
+                        foreach($dishes as $dish){
+                            echo "<section class='grid-item'>";
+                                echo "<div class='dish-thumb'>";
+                                    echo "<img class='dish' src='./imgs/".$dish["dish_img"]."' alt='".$dish["dish_lname"]."'>";
+                                    echo "<span class='price'>$".$dish["price"]."</span>";
+                                    echo "<a class='about-btn' href='details.php?id=".$dish["id_dish_info"]."'>About</a>";
+                                echo "</div>";
+                                echo "<div class= 'text-card-container'>";
+                                    echo "<p class='text-card'>".$dish["dish_sname"]."</p>";
+                                echo "</div>";
+                                echo "<div class='card-icon-container'>";
+                                    echo "<img class='cart-img' src='./imgs/carrito_de_compras.png' alt='cart'>";
+                                echo "</div>";
+                            echo "</section>";
+                        }
 
-    <h1 class="separator">Drinks</h1>
-
-    <section class="content">
-
-    <?php 
-        foreach($drinks as $index => $drink){
-            echo "<section class='grid-item'>";
-                echo "<div class='dish-thumb'>";
-                    echo "<img class='dish' src='./imgs/".$drink["dish_img"]."' alt='".$drink["dish_lname"]."'>";
-                    echo "<span class='price'>$".$drink["price"]."</span>";
-                    echo "<a class='about-btn' href='details.php?id=".$drink["id_dish_info"]."'>About</a>";
-                echo "</div>";
-                echo "<div class= 'text-card-container'>";
-                    echo "<p class='text-card'>".$drink["dish_sname"]."</p>";
-                echo "</div>";
-                echo "<div class='card-icon-container'>";
-                    echo "<img class='cart-img' src='./imgs/carrito_de_compras.png' alt='cart'>";
-                echo "</div>";
-            echo "</section>";
-        }
-    ?>
-    </section> 
+                    echo "</div>";
+                    echo "</section>";
+                }
+            ?>
 
     <footer class="footer">
         <p class="footer-text">&copy; 2023. All rights reserved.</p>
@@ -156,11 +87,5 @@
         </div>
     </footer>
 
-
-
-
 </body>
-
-
-
 </html>
