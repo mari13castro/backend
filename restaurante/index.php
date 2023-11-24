@@ -118,6 +118,4 @@ $featured = $database->select("tb_dish_info", "*", ["featured" => 1]);
         </div>
     </footer>
     <script src="./js/main.js"></script>
-
-
 </html>
