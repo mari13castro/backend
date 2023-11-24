@@ -131,3 +131,18 @@
     padding: .75rem 1.25rem;
     cursor: pointer;
 }
+
+.lang-btn{
+    font-family: var(--fuente-principal);
+    font-weight: var(--fw-bk);
+    display: block;
+    position: absolute;
+    top: 20rem;
+    right: 14rem;
+    color: var(--color-extra-3);
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 0.2rem solid var(--color-extra-3);
+    padding: 0.5em;
+    cursor: pointer;
+}
