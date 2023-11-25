@@ -24,7 +24,7 @@
         }
 
         if(isset($_POST["register"])){
-            //validate if user already registered
+
             $validateUsername = $database->select("tb_users","*",[
                 "usr"=>$_POST["username"]
             ]);
@@ -40,7 +40,6 @@
                     "email"=> $_POST["email"]
                 ]);
 
-                //header("location: book.php?id=".$_POST["register"]);
             }
         }
     }
@@ -72,45 +71,75 @@
       
             <div>
                 
+            <section>
+                    <h3>Login</h3>
+                    <p>Enter your registered username and password in the designated fields.</p>
+                    <form method="post" action="forms.php">
+                        <div>
+                            <div>
+                                <label for='username'>Username</label>
+                            </div>
+                            <div>
+                                <input id='username' type='text' name='username'>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for='password'>Password</label>
+                            </div>
+                            <div>
+                                <input id='password' type='password' name='password'>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <input type='submit' value="LOGIN">
+                            </div>
+                        </div>
+                        <p><?php echo $messageLogin; ?></p>
+                        <input type="hidden" name="login" value="1">
+                    </form>
+                </section>
+
                 <section>
-                    <h3 class='activity-title'>Sign In</h3>
+                    <h3>Sign In</h3>
                     <p>Complete the registration process to enjoy our menu.</p>
                     <form method="post" action="forms.php">
-                        <div class='form-items'>
+                        <div>
                             <div>
-                                <label class='form-label destination-extra' for='fullname'>Fullname</label>
+                                <label for='fullname'>Fullname</label>
                             </div>
                             <div>
-                                <input id='fullname' class='form-input' type='text' name='fullname'>
-                            </div>
-                        </div>
-                        <div class='form-items'>
-                            <div>
-                                <label class='form-label destination-extra' for='email'>Email Address</label>
-                            </div>
-                            <div>
-                                <input id='email' class='form-input' type='text' name='email'>
+                                <input id='fullname' type='text' name='fullname'>
                             </div>
                         </div>
-                        <div class='form-items'>
+                        <div>
                             <div>
-                                <label class='form-label destination-extra' for='username'>Username</label>
+                                <label for='email'>Email Address</label>
                             </div>
                             <div>
-                                <input id='username' class='form-input' type='text' name='username'>
-                            </div>
-                        </div>
-                        <div class='form-items'>
-                            <div>
-                                <label class='form-label destination-extra' for='password'>Password</label>
-                            </div>
-                            <div>
-                                <input id='password' class='form-input' type='password' name='password'>
+                                <input id='email' type='text' name='email'>
                             </div>
                         </div>
-                        <div class='form-items'>
+                        <div>
                             <div>
-                                <input class='form-input login-btn' type='submit' value="REGISTER">
+                                <label for='username'>Username</label>
+                            </div>
+                            <div>
+                                <input id='username' type='text' name='username'>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for='password'>Password</label>
+                            </div>
+                            <div>
+                                <input id='password' type='password' name='password'>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <input type='submit' value="REGISTER">
                             </div>
                         </div>
                         <p><?php echo $message; ?></p>
@@ -126,6 +155,6 @@
     <?php 
         include "./parts/footer.php";
     ?>
+
 </body>
 </html>
-
