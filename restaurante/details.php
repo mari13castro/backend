@@ -110,16 +110,10 @@
 
 <body>
 
-    <header>
-        <div class="nav-bar">
-            <ul class="nav-list">
-                <li class="nav-text"><a class="nav-link" href="./menu.php">Go back</a></li>
-                <li class="nav-text"><a class="nav-link" href="../index.html">Homepage</a></li>
-                <li class="nav-text"><a class="nav-link" href="#">Login</a></li>
-                <li class="nav-text"><a class="nav-link" href="#">Support</a></li>
-            </ul>
-        </div>
-    </header>
+    <?php 
+        include "./parts/header.php";
+    ?>
+    
 <main>
     <?php
         echo "<div class='description-container'>";
@@ -167,17 +161,13 @@
             echo "</div>";
     }
     echo "</div>";
-
-    echo "<footer class='footer'>";
-        echo "<p class='footer-text'>&copy; 2023. All rights reserved.</p>";
-        echo "<div class='footer-image-container'>";
-            echo "<a class='footer-image' href='#'><img src='./imgs/instagram.svg' alt='instagram'></a>";
-            echo "<a class='footer-image' href='#'><img src='./imgs/faceboook.svg' alt='facebook'></a>";
-            echo "<a class='footer-image' href='#'><img src='./imgs/twitter.svg' alt='twitter'></a>";
-        echo "</div>";
-    echo "</footer>";
-    
     ?>
+
+    <?php 
+            include "./parts/footer.php";
+    ?>
+    
+    
 
     <script src="./js/main.js"></script>
    

@@ -10,7 +10,7 @@
             $content = trim(file_get_contents("php://input"));
 
             $decoded = json_decode($content, true);
-
+            
             if($decoded["language"] == "en"){
                 $item = $database->select("tb_dish_info",[
                     "tb_dish_info.dish_lname",
