@@ -3,78 +3,40 @@
     
     $lang = "ES";
     $url_params = "";
-    
+
     if($_GET){
-        if(isset($_GET["lang"]) && $_GET["lang"] == "es" ){
-        $item = $database->select("tb_dish_info",[
-            "[>]tb_categories"=>["id_categories" => "id_categories"],
-            "[>]tb_quantity_people"=>["id_quantity_people" => "id_quantity_people"]
-        ],[
-            "tb_dish_info.id_dish_info",
-            "tb_dish_info.dish_lname",
-            "tb_dish_info.dish_lname_es",
-            "tb_dish_info.dish_sname",
-            "tb_dish_info.dish_sname_es",
-            "tb_dish_info.dish_img",
-            "tb_dish_info.dish_description",
-            "tb_dish_info.dish_description_es",
-            "tb_dish_info.price",
-            "tb_dish_info.id_categories",
-            "tb_categories.category_name",
-            "tb_categories.category_description",
-            "tb_quantity_people.quantity_category_name",
-            "tb_quantity_people.quantity_description"
-        ],[
-
-            "id_dish_info"=>$_GET["id"]
-            
-        ]);
-
-        //references
-        $item[0]["dish_lname"] = $item[0]["dish_lname_es"];
-        $item[0]["dish_description"] = $item[0]["dish_description_es"];
-
-        $lang = "EN";  
-        $url_params = "?id=".$item[0]["id_dish_info"]."&lang=EN";
-
-        }else{
-
             $item = $database->select("tb_dish_info",[
-            "[>]tb_categories"=>["id_categories" => "id_categories"],
-            "[>]tb_quantity_people"=>["id_quantity_people" => "id_quantity_people"]
-        ],[
-            "tb_dish_info.id_dish_info",
-            "tb_dish_info.dish_lname",
-            "tb_dish_info.dish_lname_es",
-            "tb_dish_info.dish_sname",
-            "tb_dish_info.dish_sname_es",
-            "tb_dish_info.dish_img",
-            "tb_dish_info.dish_description",
-            "tb_dish_info.dish_description_es",
-            "tb_dish_info.price",
-            "tb_dish_info.id_categories",
-            "tb_categories.category_name",
-            "tb_categories.category_description",
-            "tb_quantity_people.quantity_category_name",
-            "tb_quantity_people.quantity_description"
-        ],[
+                "[>]tb_categories"=>["id_categories" => "id_categories"],
+                "[>]tb_quantity_people"=>["id_quantity_people" => "id_quantity_people"]
+            ],[
+                "tb_dish_info.id_dish_info",
+                "tb_dish_info.dish_lname",
+                "tb_dish_info.dish_lname_es",
+                "tb_dish_info.dish_sname",
+                "tb_dish_info.dish_sname_es",
+                "tb_dish_info.dish_img",
+                "tb_dish_info.dish_description",
+                "tb_dish_info.dish_description_es",
+                "tb_dish_info.price",
+                "tb_dish_info.id_categories",
+                "tb_categories.category_name",
+                "tb_categories.category_description",
+                "tb_quantity_people.quantity_category_name",
+                "tb_quantity_people.quantity_description"
+            ],[
 
-            "id_dish_info"=>$_GET["id"]
-            
-        ]);
+                "id_dish_info"=>$_GET["id"]
+                
+            ]);
 
-            $lang = "ES";  
-            $url_params = "?id=".$item[0]["id_dish_info"]."&lang=es";
+            $item2 = $database->select("tb_dish_info","*",
+            [
+                "id_categories"=>$item[0]["id_categories"],
+                "id_dish_info[!]" =>$_GET["id"]
+                ]
+            );
 
-        }
-
-        $item2 = $database->select("tb_dish_info","*",
-        [
-            "id_categories"=>$item[0]["id_categories"],
-            "id_dish_info[!]" =>$_GET["id"]
-            ]
-    );
-        $relatedDish1 = rand(0,count($item2)-1);
+            $relatedDish1 = rand(0,count($item2)-1);
             do{
                 $relatedDish2 = rand(0,count($item2)-1);
 
@@ -85,9 +47,8 @@
 
             }while($relatedDish1==$relatedDish3||$relatedDish2==$relatedDish3);
 
-
-}
-
+    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -126,10 +87,9 @@
         echo "<div class='description-image-container'>";
             echo "<img src='./imgs/".$item[0]["dish_img"]."' alt='".$item[0]["dish_lname"]."'>";
         echo "</div>";
-
-        echo"<a class = 'lang-btn' href='details.php".$url_params."'>".$lang."</a>"; 
         echo "<div class='description-text-container'>";
             echo "<div class='description-inner-text-container'>";
+                echo"<span id='lang' class='lang-btn' onclick='getTranslation(".$item[0]["id_dish_info"].")'>ES</span>";
                 echo "<h2 class='about-dish-title'>".$item[0]["dish_lname"]."</h2>";
                 echo "<p>".$item[0]["dish_description"]."</p>";
                 echo "<p>Category: ".$item[0]["category_name"]."</p>";
@@ -178,6 +138,46 @@
     echo "</footer>";
     
     ?>
+
+    <script>
+
+            let requestLang = "es";
+
+            function switchLang(){
+                if(requestLang == "en") requestLang = "es";
+                else requestLang = "en";
+                document.getElementById("lang").innerText = requestLang;
+            }
+
+            function getTranslation(id){
+
+                let info = {
+                    id_dish_info: id,
+                    language: requestLang
+                };
+
+                fetch("http://localhost/backend/restaurante/language.php",{
+
+                    method: "POST",
+                    mode: "same-origin",
+                    credentails: "same-origin",
+                    headers: {
+                        'Accept': "application/json, text/plain, */*",
+                        'Content-Type': "application/json"
+                    },
+                    body: JSON.stringify(info)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    //console.log(data);
+                    switchLang();
+                    document.getElementById("dish-name").innerHTML = data.name;
+                    document.getElementById("dish-description").innerHTML = data.description;
+                })
+                .catch(err => console.log("error: " + err));
+            }
+
+    </script>
 
     <script src="./js/main.js"></script>
    

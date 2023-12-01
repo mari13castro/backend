@@ -52,8 +52,11 @@
             "id_categories"=> $_POST["dish_category"],
             "id_quantity_people"=>$_POST["quantity_category"],
             "dish_lname"=>$_POST["dish_lname"],
+            "dish_lname_es"=>$_POST["dish_lname_es"],
             "dish_sname"=>$_POST["dish_sname"],
+            "dish_sname_es"=>$_POST["dish_sname_es"],
             "dish_description"=>$_POST["dish_description"],
+            "dish_description_es"=>$_POST["dish_description_es"],
             "dish_img"=> $img,
             "price"=>$_POST["dish_price"]
         ],[
@@ -83,10 +86,20 @@
                 <label for="dish_lname">Dish Name</label>
                 <input id="dish_lname" class="textfield" name="dish_lname" type="text" value="<?php echo $item[0]["dish_lname"] ?>">
             </div>
+
+            <div class="form-items">
+                <label for="dish_lname_es">Dish Name-ES</label>
+                <input id="dish_lname_es" class="textfield" name="dish_lname_es" type="text" value="<?php echo $item[0]["dish_lname_es"] ?>">
+            </div>
             
             <div class="form-items">
                 <label for="dish_sname">Dish Short Name</label>
                 <input id="dish_sname" class="textfield" name="dish_sname" type="text" value="<?php echo $item[0]["dish_sname"] ?>">
+            </div>
+
+            <div class="form-items">
+                <label for="dish_sname_es">Dish Short Name-ES</label>
+                <input id="dish_sname_es" class="textfield" name="dish_sname_es" type="text" value="<?php echo $item[0]["dish_sname_es"] ?>">
             </div>
 
             <div class="form-items">
@@ -121,6 +134,12 @@
                 <label for="dish_description">Dish Description</label>
                 <textarea id="dish_description" name="dish_description" id="" cols="30" rows="10"><?php echo $item[0]["dish_description"]; ?></textarea>
             </div>
+
+            <div class="form-items">
+                <label for="dish_description_es">Dish Description-ES</label>
+                <textarea id="dish_description_es" name="dish_description_es" id="" cols="30" rows="10"><?php echo $item[0]["dish_description_es"]; ?></textarea>
+            </div>
+
             <div class="form-items">
                 <label for="dish_img">Dish Image</label>
                 <img id="preview" src="../imgs/<?php echo $item[0]["dish_img"]; ?>" alt="Preview">
