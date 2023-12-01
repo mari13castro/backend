@@ -121,3 +121,13 @@
     cursor: pointer;
     text-align: center;
 }
+
+.submit-btn{
+    background: var(--color-extra-3);
+    border: none;
+    background-repeat: no-repeat;
+    border-radius: .75rem;
+    background-position: center;
+    padding: .75rem 1.25rem;
+    cursor: pointer;
+}
