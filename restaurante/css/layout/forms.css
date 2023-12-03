@@ -1,0 +1,13 @@
+/*login & sign up components*/
+.search-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2vw 6vw; /* Establece el margen izquierdo y derecho en "auto" */
+    padding: .6rem 1rem;
+    background-color: #f2f2f2;
+    border-radius: 5rem;
+    width: 50%; /* Establece el ancho en el 50% del contenedor principal */
+   
+    border: none;
+}

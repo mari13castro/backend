@@ -1,0 +1,41 @@
+/* custom properties */
+:root {
+
+    /*color*/
+    --color-background: #F0F0EB;
+    /*background de contenedores y en general*/
+    --color-description: #E3A832;
+    /*color de la descripción en el header */
+    --color-text: #F1E1BA;
+    --color-primary: #3B1854;
+    /*color del fondo del header, letras del homepage y contenedores, sombra de los contenedores*/
+
+    /*Colores Extra utilizados en las ilustraciones*/
+    --color-extra-1: #DB9BD7;
+    --color-extra-2: #CAE8E7;
+    --color-extra-3: #AC0D4D;
+    --color-extra-4: #F1E1BA;
+    --color-extra-5: #000;
+
+    /*fuentes*/
+    --fuente-titulo: 'Dancing Script', cursive;
+    --fuente-principal: 'Open Sans', sans-serif;
+    /*fuentes*/
+
+    /*tamaños*/
+    --tamano-xl: 6rem;
+    /*solo título*/
+    --tamano-l: 4.5rem;
+    /*súbtitulos para la barra de navegacion del homepage*/
+    --tamano-xxl: 10rem;
+    --tamano-3rem: 3rem;
+    --tamano-m: 2rem;
+    --tamano-mm: 1.5rem;
+     --tamano-regular: 1rem;
+    /*subtitulo del header, descripción de los platillos*/
+
+    /*weight*/
+    --fw-bk: 900;
+    --fw-md: 500;
+    --fw-rg: 400;
+}

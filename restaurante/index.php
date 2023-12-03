@@ -68,7 +68,7 @@ $featured = $database->select("tb_dish_info", "*", ["featured" => 1]);
                         </ul>
                         <div class="button-container">
                             <button class="hero-menu-button"
-                                onclick="window.location.href='./pages/menu.html'">Menu</button>
+                                onclick="window.location.href='./menu.php'">Menu</button>
                         </div>
 
                     </div>
@@ -100,7 +100,7 @@ $featured = $database->select("tb_dish_info", "*", ["featured" => 1]);
                 echo "<h3>" . $featuredItem["dish_sname"] . "</h3>";
                 echo "<p>" . $featuredItem["dish_description"] . "</p>";
                 echo "<div class='card-link'>";
-                echo "<a class='card-link-style' href='./pages/details.html'>About</a>";
+                echo "<a class='card-link-style' href='details.php?id=" . $featuredItem["id_dish_info"] . "'>About</a>";
                 echo "</div>";
                 echo "</div>";                
                 echo "</div>";
