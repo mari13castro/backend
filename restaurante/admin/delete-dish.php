@@ -24,10 +24,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Dish</title>
     <link rel="stylesheet" href="../css/themes/admin.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
 
-    <h1>¿Do you want to delete this dish? </h1>
+    <header>
+        <div class="nav-bar">
+            <ul class="nav-list">
+                <li class="nav-text"><a class="nav-link" href="dish-list.php">Go back</a></li>
+                <li class="nav-text"><a class="nav-link" href="../index.html">Homepage</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <h1 class="list-title">¿Do you want to delete this dish? </h1>
         <div class="container">
             <div class="form-items">
                 <?php

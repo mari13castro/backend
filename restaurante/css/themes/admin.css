@@ -5,6 +5,37 @@ body{
 .container{
     display: grid;
     width: 15rem;
+    margin-left: 30rem;
+    margin-right: 30rem;
+
+}
+
+.list-container{
+    margin-left: 30rem;
+    margin-right: 30rem;
+    margin-bottom: 4rem;
+    border:var(--color-extra-3) 5px groove;
+}
+
+.list-titles{
+    font-family: var(--fuente-principal);
+    font-size: var(--tamano-mm);
+    color: var(--color-primary);
+}
+
+.list-title{
+    margin-left: 6rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    font-size: var(--tamano-m);
+    font-family: Tahoma;
+    color: var(--color-primary);
+}
+
+.list-text{
+    font-family: var(--fuente-principal);
+    font-size: var(--tamano-regular);
+    font-weight: bolder;
 }
 
 .form-items{

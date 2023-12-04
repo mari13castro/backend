@@ -74,10 +74,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Dish</title>
     <link rel="stylesheet" href="../css/themes/admin.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
+
+    <header>
+        <div class="nav-bar">
+            <ul class="nav-list">
+                <li class="nav-text"><a class="nav-link" href="dish-list.php">Go back</a></li>
+                <li class="nav-text"><a class="nav-link" href="../index.html">Homepage</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <h2 class="list-title">Edit Dish</h2>
     <div class="container">
-        <h2>Edit Dish</h2>
+        
         <?php 
             echo $message;
         ?>
