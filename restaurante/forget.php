@@ -7,15 +7,17 @@
     if(isset($_POST["next"])){
 
         $validateUsername = $database->select("tb_users","*",[
+           //"id_user"=>$_POST["id"],
             "usr"=>$_POST["username"], 
             "email"=> $_POST["email"]
         ]);
 
+        $id = $validateUsername[0]["id_user"];
+
         if(count($validateUsername) > 0){
-            header("location: change-pass.php");
+            header("location: change-pass.php?id=".$id);
         }else{
             $messageVerificate = "The user or email does not match with the registered";
-           
         }
     }
     

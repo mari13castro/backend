@@ -38,7 +38,7 @@
     </header>
 
     <h1 class="list-title">¿Do you want to delete this dish? </h1>
-        <div class="container">
+        <div class="delete-content">
             <div class="form-items">
                 <?php
                     echo "<h3>".$item[0]["dish_lname"]."</h3>";
@@ -46,7 +46,7 @@
                 <img id="preview" src="../imgs/<?php echo $item[0]["dish_img"]; ?>" alt="Preview">
             </div>
 
-            <div class="form-items">  
+            <div class="buttons">  
                 <form method="post" action="delete-dish.php">
                     <input name="id" type="hidden" value="<?php echo $item[0]["id_dish_info"]; ?>">
                     <input type="button" onclick="history.back();" value="Cancel">

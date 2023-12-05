@@ -75,6 +75,9 @@
             echo $message;
         ?>
         <form method="post" action="add-dish.php" enctype="multipart/form-data">
+            <table>
+            <tr>
+                <td class="td-content">
             <div class="form-items">
                 <label for="dish_lname">Dish Name</label>
                 <input id="dish_lname" class="textfield" name="dish_lname" type="text">
@@ -107,6 +110,8 @@
                 <label for="dish_description">Dish Description</label>
                 <textarea id="dish_description" name="dish_description" id="" cols="30" rows="10"></textarea>
             </div>
+            </td>
+            <td class="td-content">
             <div class="form-items">
                 <label for="dish_img">Dish Image</label>
                 <img id="preview" src="../imgs/dish-placeholder.webp" alt="Preview">
@@ -119,6 +124,9 @@
             <div class="form-items">
                 <input class="submit-btn" type="submit" value="Add New Dish">
             </div>
+            </td>
+            </tr>
+            </table>
         </form>
     </div>
 

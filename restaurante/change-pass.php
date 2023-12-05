@@ -1,25 +1,24 @@
 <?php 
    require_once '../database.php';
-    
-    $data = $database->select("tb_users", "*");
+
+   $id;
 
     if($_GET){
-        $data = $database->select("tb_users","*",[
-            "id_user"=>$_GET["id"]
-        ]);
+        $id = $_GET["id"];
     }
 
     if($_POST){
-    
-        $database->update("tb_users",[
-            "pw"=>$_POST["pw"],
-        ],[
-            "id_user"=>$_POST["id"]
-        ]);
+        $id = $_POST["id"];
+    }
 
-        if(isset($_POST["reset"])){
+   if(isset($_POST["reset"])){
+        $pass = password_hash($_POST["password"], PASSWORD_DEFAULT, ['cost' => 12]);
+        $database->update("tb_users",[
+            "pw"=>$pass,
+        ],[
+            "id_user"=>$id
+        ]);
             header("location: forms.php");
-        }
     }
 ?>
 
@@ -53,21 +52,18 @@
                     <p>Please enter your new password.</p>
                     <form method="post" action="change-pass.php">
                         <label for="password">New Password</label>
-                        <input id="pw" name="password" type="text" value="<?php echo $data[0]["pw"] ?>">
-                    </form>
+                        <input id="pw" name="password" type="text">
+                        <input id="id" name="id" type="hidden" value="<?php echo $id?>"> 
                         <div>
                             <div>
                                 <input type='submit' value="RESET">
                             </div>
                         </div>
-
                         <input type="hidden" name="reset" value="1">
-
-                    
+                    </form>
                 </section>
 
     </main>
-
 
     <?php 
         include "./parts/footer.php";
