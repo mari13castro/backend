@@ -1,15 +1,15 @@
 <?php
-    require_once '../database.php';
-    
-    $lang = "ES";
-    $url_params = "";
-    
-    if($_GET){
-        if(isset($_GET["lang"]) && $_GET["lang"] == "es" ){
-        $item = $database->select("tb_dish_info",[
-            "[>]tb_categories"=>["id_categories" => "id_categories"],
-            "[>]tb_quantity_people"=>["id_quantity_people" => "id_quantity_people"]
-        ],[
+require_once '../database.php';
+
+$lang = "ES";
+$url_params = "";
+
+if ($_GET) {
+    if (isset($_GET["lang"]) && $_GET["lang"] == "es") {
+        $item = $database->select("tb_dish_info", [
+            "[>]tb_categories" => ["id_categories" => "id_categories"],
+            "[>]tb_quantity_people" => ["id_quantity_people" => "id_quantity_people"]
+        ], [
             "tb_dish_info.id_dish_info",
             "tb_dish_info.dish_lname",
             "tb_dish_info.dish_lname_es",
@@ -24,25 +24,26 @@
             "tb_categories.category_description",
             "tb_quantity_people.quantity_category_name",
             "tb_quantity_people.quantity_description"
-        ],[
+        ], [
 
-            "id_dish_info"=>$_GET["id"]
-            
+            "id_dish_info" => $_GET["id"]
+
         ]);
 
         //references
         $item[0]["dish_lname"] = $item[0]["dish_lname_es"];
         $item[0]["dish_description"] = $item[0]["dish_description_es"];
+        $amount = 1;
 
-        $lang = "EN";  
-        $url_params = "?id=".$item[0]["id_dish_info"]."&lang=EN";
+        $lang = "EN";
+        $url_params = "?id=" . $item[0]["id_dish_info"] . "&lang=EN";
 
-        }else{
+    } else {
 
-            $item = $database->select("tb_dish_info",[
-            "[>]tb_categories"=>["id_categories" => "id_categories"],
-            "[>]tb_quantity_people"=>["id_quantity_people" => "id_quantity_people"]
-        ],[
+        $item = $database->select("tb_dish_info", [
+            "[>]tb_categories" => ["id_categories" => "id_categories"],
+            "[>]tb_quantity_people" => ["id_quantity_people" => "id_quantity_people"]
+        ], [
             "tb_dish_info.id_dish_info",
             "tb_dish_info.dish_lname",
             "tb_dish_info.dish_lname_es",
@@ -57,35 +58,45 @@
             "tb_categories.category_description",
             "tb_quantity_people.quantity_category_name",
             "tb_quantity_people.quantity_description"
-        ],[
+        ], [
 
-            "id_dish_info"=>$_GET["id"]
-            
+            "id_dish_info" => $_GET["id"]
+
         ]);
 
-            $lang = "ES";  
-            $url_params = "?id=".$item[0]["id_dish_info"]."&lang=es";
+        $lang = "ES";
+        $url_params = "?id=" . $item[0]["id_dish_info"] . "&lang=es";
+
+
+    }
+
+    $item2 = $database->select(
+        "tb_dish_info",
+        "*",
+        [
+            "id_categories" => $item[0]["id_categories"],
+            "id_dish_info[!]" => $_GET["id"]
+        ]
+    );
+    $relatedDish1 = rand(0, count($item2) - 1);
+    do {
+        $relatedDish2 = rand(0, count($item2) - 1);
+
+    } while ($relatedDish1 == $relatedDish2);
+
+    do {
+        $relatedDish3 = rand(0, count($item2) - 1);
+
+    } while ($relatedDish1 == $relatedDish3 || $relatedDish2 == $relatedDish3);
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST["foodOnCart"])) {
+            global $foodOnCart;
+            $foodOnCart = json_decode($_POST["foodOnCart"], true);
 
         }
-
-        $item2 = $database->select("tb_dish_info","*",
-        [
-            "id_categories"=>$item[0]["id_categories"],
-            "id_dish_info[!]" =>$_GET["id"]
-            ]
-    );
-        $relatedDish1 = rand(0,count($item2)-1);
-            do{
-                $relatedDish2 = rand(0,count($item2)-1);
-
-            }while($relatedDish1==$relatedDish2);
-
-            do{
-                $relatedDish3 = rand(0,count($item2)-1);
-
-            }while($relatedDish1==$relatedDish3||$relatedDish2==$relatedDish3);
-
-
+        exit(); // Important: stop further execution of the script
+    }
 }
 
 ?>
@@ -110,68 +121,103 @@
 
 <body>
 
-    <?php 
-        include "./parts/header.php";
-    ?>
-    
-<main>
     <?php
+    include "./parts/header.php";
+    ?>
+
+    <main>
+        <?php
         echo "<div class='description-container'>";
         echo "<div class='description-image-container'>";
-            echo "<img src='./imgs/".$item[0]["dish_img"]."' alt='".$item[0]["dish_lname"]."'>";
+        echo "<img src='./imgs/" . $item[0]["dish_img"] . "' alt='" . $item[0]["dish_lname"] . "'>";
         echo "</div>";
 
-        echo"<a class = 'lang-btn' href='details.php".$url_params."'>".$lang."</a>"; 
+        echo "<a class = 'lang-btn' href='details.php" . $url_params . "'>" . $lang . "</a>";
         echo "<div class='description-text-container'>";
-            echo "<div class='description-inner-text-container'>";
-                echo "<h2 class='about-dish-title'>".$item[0]["dish_lname"]."</h2>";
-                echo "<p>".$item[0]["dish_description"]."</p>";
-                echo "<p>Category: ".$item[0]["category_name"]."</p>";
-                echo "<p>".$item[0]["quantity_category_name"].": ".$item[0]["quantity_description"]."</p>";
-                echo "<p>$".$item[0]["price"]."</p>";
-                echo "<ul class='related-dishes-container'>";
-                echo "</ul>";
-
-                echo "<div class='button-container'>";
-                    echo "<a class='about-cart-button'".$item[0]["id_dish_info"]."'>Add to
-                            cart</a>";
-                echo "</div>";
-            echo "</div>";
+        echo "<div class='description-inner-text-container'>";
+        echo "<h2 class='about-dish-title'>" . $item[0]["dish_lname"] . "</h2>";
+        echo "<p>" . $item[0]["dish_description"] . "</p>";
+        echo "<p>Category: " . $item[0]["category_name"] . "</p>";
+        echo "<p>" . $item[0]["quantity_category_name"] . ": " . $item[0]["quantity_description"] . "</p>";
+        echo "<p id='price'>$" . $item[0]["price"] . "</p>";
+        echo "<ul class='related-dishes-container'>";
+        echo "</ul>";
+        echo "<form method='post' action=''>"; // Start the form
+        echo "<label for='amount'>Amount</label>";
+        echo "<input type='number' id='amount' name='amount' value='$amount' min='1'>"; // Add the amount input field
+        echo "</form>";
+        echo "<div class='button-container'>";
+        echo "<buttom id='add-cart-buttom' class='about-cart-button'" . $item[0]["id_dish_info"] . "'>Add to
+                            cart</buttom>";
         echo "</div>";
-    echo "</div>";
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
 
         echo "<div class='dishes-title-container'>";
         echo "<h1 class='top-dishes-title'>Related Dishes</h1>";
-    echo "</div>";
+        echo "</div>";
 
-    echo "<div class='top-dishes'>";
-    for($i=0; $i<3; $i++){
-        if($i==0){$randomRelated=$relatedDish1;}
-        if($i==1){$randomRelated=$relatedDish2;}
-        if($i==2){$randomRelated=$relatedDish3;}
+        echo "<div class='top-dishes'>";
+
+        for ($i = 0; $i < 3; $i++) {
+            if ($i == 0) {
+                $randomRelated = $relatedDish1;
+            }
+            if ($i == 1) {
+                $randomRelated = $relatedDish2;
+            }
+            if ($i == 2) {
+                $randomRelated = $relatedDish3;
+            }
             echo "<div class='reversible-card'>";
-                echo "<div class='face front'>";
-                    echo "<img src='./imgs/".$item2[$randomRelated]["dish_img"]."' alt='".$item2[$randomRelated]["dish_lname"]."'>";
-                    echo "<h3>".$item2[$randomRelated]["dish_sname"]."</h3>";
-                echo "</div>";
-                echo "<div class='face back'>";
-                    echo "<h3>".$item2[$randomRelated]["dish_lname"]."</h3>";
-                    echo "<p>".$item2[$randomRelated]["dish_description"]."</p>";
-                echo "</div>";
+            echo "<div class='face front'>";
+            echo "<img src='./imgs/" . $item2[$randomRelated]["dish_img"] . "' alt='" . $item2[$randomRelated]["dish_lname"] . "'>";
+            echo "<h3>" . $item2[$randomRelated]["dish_sname"] . "</h3>";
             echo "</div>";
-    }
-    echo "</div>";
-    ?>
+            echo "<div class='face back'>";
+            echo "<h3>" . $item2[$randomRelated]["dish_lname"] . "</h3>";
+            echo "<p>" . $item2[$randomRelated]["dish_description"] . "</p>";
+            echo "</div>";
+            echo "</div>";
+        }
+        echo "</div>";
+        ?>
 
-    <?php 
-            include "./parts/footer.php";
-    ?>
-    
-    
+        <?php
+        include "./parts/footer.php";
+        ?>
+        <script>
+            var amountInput = document.getElementById("amount");
+            var price = <?php echo $item[0]["price"]; ?>;
+            var foodOnCart = [];
+            var dish_id = <?php echo $item[0]["id_dish_info"] ?>;
+            var addCartButton = document.getElementById("add-cart-buttom");
 
-    <script src="./js/main.js"></script>
-   
-</main>
+            amountInput.addEventListener("change", function () {
+                var amount = amountInput.value;
+                var total = amount * price;
+                document.getElementById("price").innerHTML = "$" + total;
+            });
+
+            addCartButton.addEventListener("click", function () {
+                var item = {
+                    amount: amountInput.value,
+                    id: dish_id
+                };
+                foodOnCart.push(item);
+                console.log(foodOnCart);
+
+                // Send a POST request to a PHP script
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "forms.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("foodOnCart=" + encodeURIComponent(JSON.stringify(foodOnCart)));
+            });
+        </script>
+        <script src="./js/main.js"></script>
+
+    </main>
 </body>
 
 </html>

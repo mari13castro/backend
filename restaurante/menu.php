@@ -26,17 +26,9 @@ $categories = $database->select("tb_categories", "*");
 
 <body>
 
-    <header>
-        <div class="banner">
-            <ul class="nav-list">
-                <li class="nav-text"><a class="nav-link" href="../index.html">Go back</a></li>
-                <li class="nav-text"><a class="nav-link" href="#">Login</a></li>
-                <li class="nav-text"><a class="nav-link" href="#">Contact Us</a></li>
-                <li class="nav-text"><a class="nav-link" href="#">Support</a></li>
-            </ul>
-            <h1 class="banner-title">Menu</h1>
-        </div>
-    </header>
+    <?php
+    include "./parts/header.php";
+    ?>
 
     <?php
     foreach ($categories as $category) {

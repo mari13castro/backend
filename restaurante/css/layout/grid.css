@@ -106,7 +106,7 @@
     width: 80vw;
     height: 90vh;
     box-shadow: 0 0 10px var(--color-primary);
-    max-height: 700px;
+    max-height: 900px;
 }
 
 .description-image-container {
