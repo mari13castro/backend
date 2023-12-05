@@ -2,18 +2,14 @@
 require_once '../database.php';
 $categories = $database->select("tb_categories", "*");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verificar si el usuario ha iniciado sesión
-    if (!isset($_SESSION['user_id'])) {
-        // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
-        header('Location: forms.php');
-        exit;
-    }
+
+
 
     $database->insert("tb_order_registration", [
         "id_dish_info" => $_POST['dish_id'],
         "date" => $_POST["date"],
         "time" => $_POST["time"],
-        "order_quantity" => $_POST["amount"],
+        "order_quantity" => $_POST["amount"],    
     ]);
 }
 ?>
@@ -35,18 +31,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <link rel="stylesheet" href="./css/main.css">
 
     </head>
+    <?php
+    include "./parts/header.php";
+    ?>
 
     <body>
-
-        <?php
-        include "./parts/header.php";
-        ?>
-
         <main>
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                echo "<h2 style='font-size: 2.5em; color: purple;'>Thank you for your order!</h2>";
+                echo "<h3 style='font-size: 1.5em; color: purple;'>Your order number is: " . $database->id() . "</h3>";
+            }
+
+            ?>
 
         </main>
-
-
     </body>
 
     </html>
