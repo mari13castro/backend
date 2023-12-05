@@ -2,6 +2,13 @@
 require_once '../database.php';
 $categories = $database->select("tb_categories", "*");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Verificar si el usuario ha iniciado sesión
+    if (!isset($_SESSION['user_id'])) {
+        // Si el usuario no ha iniciado sesión, redirigirlo a la página de inicio de sesión
+        header('Location: forms.php');
+        exit;
+    }
+
     $database->insert("tb_order_registration", [
         "id_dish_info" => $_POST['dish_id'],
         "date" => $_POST["date"],

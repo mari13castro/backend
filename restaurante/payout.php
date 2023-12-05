@@ -119,7 +119,7 @@ if ($_GET) {
                         <div>
                         <input class="input" type="number" id="amount" name="amount" min="1" value="1">
                         </div>
-                        <input class="add-cart-buttomc" type="submit" value="order">
+                        <input class="add-cart-buttom" type="submit" value="order">
                     </form>
                 </div>
             </div>

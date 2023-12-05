@@ -10,6 +10,7 @@
             if (isset($_SESSION["isLoggedIn"])) {
                 echo "<li><a class='nav-link' href='profile.php'>" . $_SESSION["fullname"] . "</a></li>";
                 echo "<li><a class='nav-link' href='logout.php'>Logout</a></li>";
+                echo "<li><a class='nav-link' href='log.php'>Shopping history</a></li>";
             } else {
                 echo "<li><a class='nav-link' href='./forms.php'>Login</a></li>";
             }
