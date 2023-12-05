@@ -74,14 +74,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Dish</title>
     <link rel="stylesheet" href="../css/themes/admin.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
+
+    <header>
+        <div class="nav-bar">
+            <ul class="nav-list">
+                <li class="nav-text"><a class="nav-link" href="dish-list.php">Go back</a></li>
+                <li class="nav-text"><a class="nav-link" href="../index.html">Homepage</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <h2 class="list-title">Edit Dish</h2>
     <div class="container">
-        <h2>Edit Dish</h2>
+        
         <?php 
             echo $message;
         ?>
         <form method="post" action="edit-dish.php" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td class="td-content">
             <div class="form-items">
                 <label for="dish_lname">Dish Name</label>
                 <input id="dish_lname" class="textfield" name="dish_lname" type="text" value="<?php echo $item[0]["dish_lname"] ?>">
@@ -130,6 +145,8 @@
                     ?>
                 </select>
             </div>
+            </td>
+            <td>
             <div class="form-items">
                 <label for="dish_description">Dish Description</label>
                 <textarea id="dish_description" name="dish_description" id="" cols="30" rows="10"><?php echo $item[0]["dish_description"]; ?></textarea>
@@ -139,7 +156,8 @@
                 <label for="dish_description_es">Dish Description-ES</label>
                 <textarea id="dish_description_es" name="dish_description_es" id="" cols="30" rows="10"><?php echo $item[0]["dish_description_es"]; ?></textarea>
             </div>
-
+            </td>
+            <td>
             <div class="form-items">
                 <label for="dish_img">Dish Image</label>
                 <img id="preview" src="../imgs/<?php echo $item[0]["dish_img"]; ?>" alt="Preview">
@@ -153,6 +171,9 @@
             <div class="form-items">
                 <input class="submit-btn" type="submit" value="Update Dish">
             </div>
+            </td>
+            </tr>
+            </table>
         </form>
     </div>
 

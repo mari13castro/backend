@@ -23,10 +23,15 @@
             }
         }
 
+        if(isset($_POST["forget"])){
+            header("location: forget.php");
+        }
+
         if(isset($_POST["register"])){
 
             $validateUsername = $database->select("tb_users","*",[
-                "usr"=>$_POST["username"]
+                "usr"=>$_POST["username"], 
+                "email"=> $_POST["email"]
             ]);
 
             if(count($validateUsername) > 0){
@@ -96,10 +101,28 @@
                                 <input type='submit' value="LOGIN">
                             </div>
                         </div>
+
                         <p><?php echo $messageLogin; ?></p>
                         <input type="hidden" name="login" value="1">
+
                     </form>
+
+                    <form method="post" action="forms.php">
+
+                    <div>
+                        <div>
+                            <input type='submit' value="FORGOT YOUR PASSWORD?">
+                        </div>
+                    </div>
+
+                    
+                        <input type="hidden" name="forget" value="1">
+
+                    </form>
+
                 </section>
+
+                        
 
                 <section>
                     <h3>Sign In</h3>

@@ -55,14 +55,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Dish</title>
     <link rel="stylesheet" href="../css/themes/admin.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Add New Dish</h2>
+
+    <header>
+        <div class="nav-bar">
+            <ul class="nav-list">
+                <li class="nav-text"><a class="nav-link" href="../menu.php">Go back</a></li>
+                <li class="nav-text"><a class="nav-link" href="../index.html">Homepage</a></li>
+            </ul>
+        </div>
+    </header>
+
+    
+        <h2 class="list-title">Add New Dish</h2>
+        <div class="container">
         <?php 
             echo $message;
         ?>
         <form method="post" action="add-dish.php" enctype="multipart/form-data">
+            <table>
+            <tr>
+                <td class="td-content">
             <div class="form-items">
                 <label for="dish_lname">Dish Name</label>
                 <input id="dish_lname" class="textfield" name="dish_lname" type="text">
@@ -95,6 +110,8 @@
                 <label for="dish_description">Dish Description</label>
                 <textarea id="dish_description" name="dish_description" id="" cols="30" rows="10"></textarea>
             </div>
+            </td>
+            <td class="td-content">
             <div class="form-items">
                 <label for="dish_img">Dish Image</label>
                 <img id="preview" src="../imgs/dish-placeholder.webp" alt="Preview">
@@ -107,6 +124,9 @@
             <div class="form-items">
                 <input class="submit-btn" type="submit" value="Add New Dish">
             </div>
+            </td>
+            </tr>
+            </table>
         </form>
     </div>
 
