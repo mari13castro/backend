@@ -6,6 +6,7 @@
             <li class="nav-text"><a class="nav-link" href="#">Support</a></li>
             <?php
             session_start();
+
             if (isset($_SESSION["isLoggedIn"])) {
                 echo "<li><a class='nav-link' href='profile.php'>" . $_SESSION["fullname"] . "</a></li>";
                 echo "<li><a class='nav-link' href='logout.php'>Logout</a></li>";
@@ -16,13 +17,10 @@
                 // Accede a los datos de 'foodList' y muéstralo
                 $foodList = $_SESSION['foodList'];
                 // Puedes imprimirlo como texto, mostrarlo en un menú desplegable, o usarlo como necesites
-                echo '<pre>';
+                echo '<P>';
                 print_r($foodList); // Esto mostrará el contenido de 'foodList'
-                echo '</pre>';
+                echo '</P>';
             }
-
-
-
             ?>
         </ul>
     </div>

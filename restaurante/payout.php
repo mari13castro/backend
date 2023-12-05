@@ -1,6 +1,8 @@
 <?php
 require_once '../database.php';
 
+$amount = 1;
+
 $lang = "ES";
 $url_params = "";
 
@@ -59,15 +61,10 @@ if ($_GET) {
             "tb_quantity_people.quantity_category_name",
             "tb_quantity_people.quantity_description"
         ], [
-
             "id_dish_info" => $_GET["id"]
-
         ]);
-
         $lang = "ES";
         $url_params = "?id=" . $item[0]["id_dish_info"] . "&lang=es";
-
-
     }
     $item2 = $database->select(
         "tb_dish_info",
@@ -77,16 +74,6 @@ if ($_GET) {
             "id_dish_info[!]" => $_GET["id"]
         ]
     );
-    $relatedDish1 = rand(0, count($item2) - 1);
-    do {
-        $relatedDish2 = rand(0, count($item2) - 1);
-
-    } while ($relatedDish1 == $relatedDish2);
-
-    do {
-        $relatedDish3 = rand(0, count($item2) - 1);
-
-    } while ($relatedDish1 == $relatedDish3 || $relatedDish2 == $relatedDish3);
 }
 
 ?>
@@ -118,11 +105,6 @@ if ($_GET) {
     <main>
         <?php
         echo "<div class='description-container'>";
-        echo "<div class='description-image-container'>";
-        echo "<img src='./imgs/" . $item[0]["dish_img"] . "' alt='" . $item[0]["dish_lname"] . "'>";
-        echo "</div>";
-
-        echo "<a class = 'lang-btn' href='details.php" . $url_params . "'>" . $lang . "</a>";
         echo "<div class='description-text-container'>";
         echo "<div class='description-inner-text-container'>";
         echo "<h2 class='about-dish-title'>" . $item[0]["dish_lname"] . "</h2>";
@@ -132,50 +114,39 @@ if ($_GET) {
         echo "<p id='price'>$" . $item[0]["price"] . "</p>";
         echo "<ul class='related-dishes-container'>";
         echo "</ul>";
+        echo "<p>Amount:<p/>.<input type='number' id='amount' name='amount' value='$amount' min='1'>";
+        echo "<p>Order Type:<p/>.<select id='delivery-method' name='delivery-method'>
+            <option value='saloon'>Saloon Express</option>
+             <option value='to-go'>To Go</option>
+             <option value='express'>Express</option>
+            </select>";
         echo "<div class='button-container'>";
-        echo "<buttom id='add-cart-buttom' class='about-cart-button'" . $item[0]["id_dish_info"] . "'>Add to
-                            cart</buttom>";
+        echo "<buttom id='add-cart-buttom' class='about-cart-button'" . $item[0]["id_dish_info"] . "'>Buy</buttom>";
         echo "</div>";
         echo "</div>";
         echo "</div>";
-        echo "</div>";
-
-        echo "<div class='dishes-title-container'>";
-        echo "<h1 class='top-dishes-title'>Related Dishes</h1>";
-        echo "</div>";
-
-        echo "<div class='top-dishes'>";
-
-        for ($i = 0; $i < 3; $i++) {
-            if ($i == 0) {
-                $randomRelated = $relatedDish1;
-            }
-            if ($i == 1) {
-                $randomRelated = $relatedDish2;
-            }
-            if ($i == 2) {
-                $randomRelated = $relatedDish3;
-            }
-            echo "<div class='reversible-card'>";
-            echo "<div class='face front'>";
-            echo "<img src='./imgs/" . $item2[$randomRelated]["dish_img"] . "' alt='" . $item2[$randomRelated]["dish_lname"] . "'>";
-            echo "<h3>" . $item2[$randomRelated]["dish_sname"] . "</h3>";
-            echo "</div>";
-            echo "<div class='face back'>";
-            echo "<h3>" . $item2[$randomRelated]["dish_lname"] . "</h3>";
-            echo "<p>" . $item2[$randomRelated]["dish_description"] . "</p>";
-            echo "</div>";
-            echo "</div>";
-        }
         echo "</div>";
         ?>
 
-        <?php
-        include "./parts/footer.php";
-        ?>
+        <script>
+            var amountInput = document.getElementById("amount");
+            var price = <?php echo $item[0]["price"]; ?>;
+            var foodOnCart = [];
+            var dish_id = <?php echo $item[0]["id_dish_info"] ?>;
+            var addCartButton = document.getElementById("add-cart-buttom");
+
+            amountInput.addEventListener("change", function () {
+                var amount = amountInput.value;
+                var total = amount * price;
+                document.getElementById("price").innerHTML = "$" + total;
+            });
+        </script>
         <script src="./js/main.js"></script>
 
     </main>
 </body>
+<?php
+include "./parts/footer.php";
+?>
 
 </html>

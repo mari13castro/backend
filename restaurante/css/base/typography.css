@@ -86,16 +86,7 @@
   font-weight: 500;
   color: var(--color-primary);
   padding: 0;
-  margin: 1.25vw 0
-}
-
-.description-inner-text-container p {
-  font-size: clamp(.6rem, 3vw, var(--tamano-mm));
-  font-family: var(--fuente-principal);
-  font-weight: 500;
-  color: var(--color-primary);
-  padding: 0;
-  margin: 1.25vw 0
+  margin: .75vw 0
 }
 
 .hero-title {
