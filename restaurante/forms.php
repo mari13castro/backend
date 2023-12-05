@@ -11,6 +11,7 @@
             ]);
             if(count($user) > 0){
                 if(password_verify($_POST["password"], $user[0]["pw"])){
+                    $foodOnCart = [];
                     session_start();
                     $_SESSION["isLoggedIn"] = true;
                     $_SESSION["fullname"] = $user[0]["fullname"];

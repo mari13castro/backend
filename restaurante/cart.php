@@ -65,14 +65,18 @@ if ($_GET) {
         echo "<p>$" . $item[0]["price"] . "</p>";
 
         echo "<div class='button-container'>";
-        echo "<button class='about-cart-button' onclick='window.location.href='./menu.html''>Add to
-                            cart</button>";
+        echo "<button class='about-cart-button'>Add to cart</button>";
         echo "</div>";
         echo "</div>";
         echo "</div>";
         echo "</div>";
         ?>
+
+    <script>
+        
+    </script>
     </main>
+
 </body>
 
 </html>

@@ -133,7 +133,7 @@
                 echo "</ul>";
 
                 echo "<div class='button-container'>";
-                    echo "<a class='about-cart-button'href='cart.php?id=".$item[0]["id_dish_info"]."'>Add to
+                    echo "<a class='about-cart-button'".$item[0]["id_dish_info"]."'>Add to
                             cart</a>";
                 echo "</div>";
             echo "</div>";

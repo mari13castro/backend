@@ -43,12 +43,9 @@ $featured = $database->select("tb_dish_info", "*", ["featured" => 1]);
         <section class="hero-container">
             <div class="top-container">
                 <div class="hero-text-container">
-                    <ul class="nav-list">
-                        <li class="nav-text"><a class="nav-link" href="#">Login</a></li>
-                        <li class="nav-text"><a class="nav-link" href="#">About</a></li>
-                        <li class="nav-text"><a class="nav-link" href="#">Contact Us</a></li>
-                        <li class="nav-text"><a class="nav-link" href="#">Support</a></li>
-                    </ul>
+                        <?php
+                        include "./parts/header.php";
+                        ?>
                     <div class="hero-title-container">
                         <h1 class="hero-title">La Cantina</h1>
                     </div>
@@ -67,8 +64,7 @@ $featured = $database->select("tb_dish_info", "*", ["featured" => 1]);
                             <li class="hero-description">gastronomic journey."</li>
                         </ul>
                         <div class="button-container">
-                            <button class="hero-menu-button"
-                                onclick="window.location.href='./menu.php'">Menu</button>
+                            <button class="hero-menu-button" onclick="window.location.href='./menu.php'">Menu</button>
                         </div>
 
                     </div>
@@ -102,7 +98,7 @@ $featured = $database->select("tb_dish_info", "*", ["featured" => 1]);
                 echo "<div class='card-link'>";
                 echo "<a class='card-link-style' href='details.php?id=" . $featuredItem["id_dish_info"] . "'>About</a>";
                 echo "</div>";
-                echo "</div>";                
+                echo "</div>";
                 echo "</div>";
             }
             ?>
