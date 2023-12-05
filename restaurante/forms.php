@@ -82,91 +82,110 @@ if ($_POST) {
 
     <main>
 
-        <div>
+        <div class="description-container">
 
-            <section>
-                <h3>Login</h3>
-                <p>Enter your registered username and password in the designated fields.</p>
-                <form method="post" action="forms.php">
-                    <div>
-                        <div>
-                            <label for='username'>Username</label>
-                        </div>
-                        <div>
-                            <input id='username' type='text' name='username'>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <label for='password'>Password</label>
-                        </div>
-                        <div>
-                            <input id='password' type='password' name='password'>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <input type='submit' value="LOGIN">
-                        </div>
-                    </div>
-                    <p>
-                        <?php echo $messageLogin; ?>
+
+            <div class="cover"></div>
+            <div class="description-text-container">
+                <div>
+                    <h3 class="form-text">Login</h3>
+                    <p class="form-description">Enter your registered username and password in the designated fields.
                     </p>
-                    <input type="hidden" name="login" value="1">
-                </form>
+                    <form method="post" action="forms.php">
+                        <div>
+                            <div>
+                                <label for='username'>Username</label>
+                            </div>
+                            <div>
+                                <input id='username' type='text' name='username'>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for='password'>Password</label>
+                            </div>
+                            <div>
+                                <input id='password' type='password' name='password'>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <input type='submit' value="LOGIN">
+                            </div>
+                        </div>
+                        <p>
+                            <?php echo $messageLogin; ?>
+                        </p>
+                        <input type="hidden" name="login" value="1">
+
+                        "<buttom id='sign-in' class="buttom-forms">Sign in</buttom>";
+                    </form>
+                </div>
+
+
+            </div>
+
+            <div class="description-text-container">
+                <div>
+                    <p class="form-text">Sign in</p>
+                    <p class="form-description">Complete the registration process to enjoy our menu.</p>
+                    <form method="post" action="forms.php">
+                        <div>
+                            <div>
+                                <label for='fullname'>Fullname</label>
+                            </div>
+                            <div>
+                                <input id='fullname' type='text' name='fullname'>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for='email'>Email Address</label>
+                            </div>
+                            <div>
+                                <input id='email' type='text' name='email'>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for='username'>Username</label>
+                            </div>
+                            <div>
+                                <input id='username' type='text' name='username'>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for='password'>Password</label>
+                            </div>
+                            <div>
+                                <input id='password' type='password' name='password'>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <input type='submit' value="REGISTER">
+                            </div>
+                        </div>
+                        <p>
+                            <?php echo $message; ?>
+                        </p>
+                        <input type="hidden" name="register" value="1">
+                        "<buttom id='log-in' class="buttom-forms">Log in</buttom>";
+                    </form>
+                </div>
+            </div>
+            <script>
+                document.getElementById('sign-in').onclick = function () {
+                    document.querySelector('.cover').style.left = '0%';
+                }
+
+                document.getElementById('log-in').onclick = function () {
+                    document.querySelector('.cover').style.left = '50%';
+                }
+            </script>
+
             </section>
-
-            <section>
-                <h3>Sign In</h3>
-                <p>Complete the registration process to enjoy our menu.</p>
-                <form method="post" action="forms.php">
-                    <div>
-                        <div>
-                            <label for='fullname'>Fullname</label>
-                        </div>
-                        <div>
-                            <input id='fullname' type='text' name='fullname'>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <label for='email'>Email Address</label>
-                        </div>
-                        <div>
-                            <input id='email' type='text' name='email'>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <label for='username'>Username</label>
-                        </div>
-                        <div>
-                            <input id='username' type='text' name='username'>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <label for='password'>Password</label>
-                        </div>
-                        <div>
-                            <input id='password' type='password' name='password'>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <input type='submit' value="REGISTER">
-                        </div>
-                    </div>
-                    <p>
-                        <?php echo $message; ?>
-                    </p>
-                    <input type="hidden" name="register" value="1">
-                </form>
-            </section>
-
-        </div>
-
-        </section>
 
     </main>
     <?php

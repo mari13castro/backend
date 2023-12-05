@@ -29,8 +29,11 @@ if ($_GET) {
         ], [
 
             "id_dish_info" => $_GET["id"]
+            
 
         ]);
+
+        $dish_id = $item[0]["id_dish_info"];
 
         //references
         $item[0]["dish_lname"] = $item[0]["dish_lname_es"];
@@ -76,22 +79,14 @@ if ($_GET) {
     );
 
     if (isset($_POST["order"])) {
-
-        $validateUsername = $database->select("tb_order_registration", "*", [
-            "usr" => $_POST["username"]
-        ]);
-
-        if (count($validateUsername) > 0) {
-            $message = "This username is already registered";
-        } else {
-            $database->insert("tb_users", [
-                "fullname" => $_POST["fullname"],
-                "usr" => $_POST["username"],
-                "pw" => $pass,
-                "email" => $_POST["email"]
+            $database->insert("tb_order_registration", [
+                "id_dish_info" => $dish_id,
+                "order_price" => $_POST["total"],
+                "date" => $_POST["date"],
+                "time" => $_POST["time"],
+                "order_quantity" => $_POST["amount"],
             ]);
 
-        }
     }
 }
 
@@ -133,15 +128,20 @@ if ($_GET) {
         echo "<p id='price'>$" . $item[0]["price"] . "</p>";
         echo "<ul class='related-dishes-container'>";
         echo "</ul>";
-        echo "<p>Amount:<p/>.<input type='number' id='amount' name='amount' value='$amount' min='1'>";
-        echo "<p>Order Type:<p/>.<select id='delivery-method' name='delivery-method'>
-            <option value='saloon'>Saloon Express</option>
-             <option value='to-go'>To Go</option>
-             <option value='express'>Express</option>
-            </select>";
+        echo "<form method='post' action='payout.php'>";
+        echo "<p>Amount:<p/><input type='number' id='amount' name='amount' value='$amount' min='1'>";
+        echo "<p>Order Type:<p/><select id='delivery-method' name='delivery-method'>
+                        <option value='1'>Saloon Express</option>
+                        <option value='3'>To Go</option>
+                        <option value='2'>Express</option>
+                    </select>";
         echo "<div class='button-container'>";
-        echo "<buttom id='payout' class='about-cart-button'" . $item[0]["id_dish_info"] . "'>Buy</buttom>";
+        echo "<input type='hidden' id='total' name='total' value=''>";
+        echo "<input type='hidden' id='date' name='date' value=''>";
+        echo "<input type='hidden' id='time' name='time' value=''>";
+        echo "<input id='payout' type='submit' class='about-cart-button' value='order'>";
         echo "</div>";
+        echo "</form>";
         echo "</div>";
         echo "</div>";
         echo "</div>";
@@ -157,8 +157,21 @@ if ($_GET) {
             amountInput.addEventListener("change", function () {
                 var amount = amountInput.value;
                 var total = amount * price;
+                var totalInput = document.getElementById("total");
+                totalInput.value = total;
                 document.getElementById("price").innerHTML = "$" + total;
             });
+                document.getElementById('payout').onclick = function () {
+                    var currentDate = new Date();
+
+                    var date = currentDate.toISOString().split('T')[0]; // Fecha en formato YYYY-MM-DD
+                    var time = currentDate.toTimeString().split(' ')[0]; // Hora en formato HH:MM:SS
+
+                    document.getElementById('date').value = date;
+                    document.getElementById('time').value = time;
+
+                }
+
         </script>
         <script src="./js/main.js"></script>
 
