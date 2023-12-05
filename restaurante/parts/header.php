@@ -14,9 +14,7 @@
                 echo "<li><a class='nav-link' href='./forms.php'>Login</a></li>";
             }
             if (isset($_SESSION['foodList'])) {
-                // Accede a los datos de 'foodList' y muéstralo
                 $foodList = $_SESSION['foodList'];
-                // Puedes imprimirlo como texto, mostrarlo en un menú desplegable, o usarlo como necesites
                 echo '<P>';
                 print_r($foodList); // Esto mostrará el contenido de 'foodList'
                 echo '</P>';

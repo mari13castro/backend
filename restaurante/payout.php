@@ -1,11 +1,6 @@
 <?php
 require_once '../database.php';
-
 $amount = 1;
-
-$lang = "ES";
-$url_params = "";
-
 if ($_GET) {
     if (isset($_GET["lang"]) && $_GET["lang"] == "es") {
         $item = $database->select("tb_dish_info", [
@@ -29,7 +24,7 @@ if ($_GET) {
         ], [
 
             "id_dish_info" => $_GET["id"]
-            
+
 
         ]);
 
@@ -38,11 +33,6 @@ if ($_GET) {
         //references
         $item[0]["dish_lname"] = $item[0]["dish_lname_es"];
         $item[0]["dish_description"] = $item[0]["dish_description_es"];
-        $amount = 1;
-
-        $lang = "EN";
-        $url_params = "?id=" . $item[0]["id_dish_info"] . "&lang=EN";
-
     } else {
 
         $item = $database->select("tb_dish_info", [
@@ -77,17 +67,8 @@ if ($_GET) {
             "id_dish_info[!]" => $_GET["id"]
         ]
     );
+    $dish_id = $_GET["id"];
 
-    if (isset($_POST["order"])) {
-            $database->insert("tb_order_registration", [
-                "id_dish_info" => $dish_id,
-                "order_price" => $_POST["total"],
-                "date" => $_POST["date"],
-                "time" => $_POST["time"],
-                "order_quantity" => $_POST["amount"],
-            ]);
-
-    }
 }
 
 ?>
@@ -117,60 +98,68 @@ if ($_GET) {
     ?>
 
     <main>
-        <?php
-        echo "<div class='description-container'>";
-        echo "<div class='description-text-container'>";
-        echo "<div class='description-inner-text-container'>";
-        echo "<h2 class='about-dish-title'>" . $item[0]["dish_lname"] . "</h2>";
-        echo "<p>" . $item[0]["dish_description"] . "</p>";
-        echo "<p>Category: " . $item[0]["category_name"] . "</p>";
-        echo "<p>" . $item[0]["quantity_category_name"] . ": " . $item[0]["quantity_description"] . "</p>";
-        echo "<p id='price'>$" . $item[0]["price"] . "</p>";
-        echo "<ul class='related-dishes-container'>";
-        echo "</ul>";
-        echo "<form method='post' action='payout.php'>";
-        echo "<p>Amount:<p/><input type='number' id='amount' name='amount' value='$amount' min='1'>";
-        echo "<p>Order Type:<p/><select id='delivery-method' name='delivery-method'>
-                        <option value='1'>Saloon Express</option>
-                        <option value='3'>To Go</option>
-                        <option value='2'>Express</option>
-                    </select>";
-        echo "<div class='button-container'>";
-        echo "<input type='hidden' id='total' name='total' value=''>";
-        echo "<input type='hidden' id='date' name='date' value=''>";
-        echo "<input type='hidden' id='time' name='time' value=''>";
-        echo "<input id='payout' type='submit' class='about-cart-button' value='order'>";
-        echo "</div>";
-        echo "</form>";
-        echo "</div>";
-        echo "</div>";
-        echo "</div>";
-        ?>
+        <div class='description-container'>
+            <div class='description-text-container'>
+                <?php
+                echo "<div class='description-inner-text-container'>";
+                echo "<h2 class='about-dish-title'>" . $item[0]["dish_lname"] . "</h2>";
+                echo "<p>" . $item[0]["dish_description"] . "</p>";
+                echo "<p>Category: " . $item[0]["category_name"] . "</p>";
+                echo "<p>" . $item[0]["quantity_category_name"] . ": " . $item[0]["quantity_description"] . "</p>";
+                echo "<p id='price'>$" . $item[0]["price"] . "</p>";
+                echo "</ul>";
+                echo "</div>";
+                echo "</div>";
+                ?>
+
+                <form id="myForm" method="post" action="confirmation.php">
+                    <input type="hidden" name="dish_id" value="<?php echo $item[0]['id_dish_info']; ?>">
+                    <input type="hidden" id="date" name="date">
+                    <input type="hidden" id="time" name="time">
+                    <input type="hidden" id="last_price" name="last_price">
+                    <input type="number" id="amount" name="amount" min="1" value="1">
+                    <input type="submit" value="order">
+                </form>
+            </div>
+        </div>
+
 
         <script>
             var amountInput = document.getElementById("amount");
             var price = <?php echo $item[0]["price"]; ?>;
-            var foodOnCart = [];
             var dish_id = <?php echo $item[0]["id_dish_info"] ?>;
             var addCartButton = document.getElementById("add-cart-buttom");
 
             amountInput.addEventListener("change", function () {
-                var amount = amountInput.value;
                 var total = amount * price;
                 var totalInput = document.getElementById("total");
                 totalInput.value = total;
                 document.getElementById("price").innerHTML = "$" + total;
+                document.getElementById("last_price").value = total;
             });
-                document.getElementById('payout').onclick = function () {
-                    var currentDate = new Date();
+            document.getElementById('myForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                var amountInput = document.getElementById("amount");
+                var price = <?php echo $item[0]["price"]; ?>;
+                var totalInput = document.getElementById("last_price");
 
-                    var date = currentDate.toISOString().split('T')[0]; // Fecha en formato YYYY-MM-DD
-                    var time = currentDate.toTimeString().split(' ')[0]; // Hora en formato HH:MM:SS
+                var amount = amountInput.value;
+                var total = amount * price;
 
-                    document.getElementById('date').value = date;
-                    document.getElementById('time').value = time;
+                var currentDate = new Date();
+                var date = currentDate.toISOString().split('T')[0]; // Fecha en formato YYYY-MM-DD
+                var time = currentDate.toTimeString().split(' ')[0]; // Hora en formato HH:MM:SS
 
-                }
+                document.getElementById('date').value = date;
+                document.getElementById('time').value = time;
+                totalInput.value = total;
+
+                console.log('Date: ' + date);
+                console.log('Time: ' + time);
+                console.log('Amount: ' + amount); 
+                console.log('Total: ' + total);
+                this.submit();
+            });
 
         </script>
         <script src="./js/main.js"></script>
