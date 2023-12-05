@@ -133,8 +133,7 @@ if ($_GET) {
         echo "<ul class='related-dishes-container'>";
         echo "</ul>";
         echo "<div class='button-container'>";
-        echo "<buttom id='add-cart-buttom' class='about-cart-button'" . $item[0]["id_dish_info"] . "'>Add to
-                            cart</buttom>";
+        echo "<button id='add-cart-button' class='about-cart-button' onclick='window.location.href=\"payout.php?id=" . $item[0]["id_dish_info"] . "\"'>Add to cart</button>";
         echo "</div>";
         echo "</div>";
         echo "</div>";

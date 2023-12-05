@@ -100,26 +100,28 @@ if ($_GET) {
     <main>
         <div class='description-container'>
             <div class='description-text-container'>
-                <?php
-                echo "<div class='description-inner-text-container'>";
-                echo "<h2 class='about-dish-title'>" . $item[0]["dish_lname"] . "</h2>";
-                echo "<p>" . $item[0]["dish_description"] . "</p>";
-                echo "<p>Category: " . $item[0]["category_name"] . "</p>";
-                echo "<p>" . $item[0]["quantity_category_name"] . ": " . $item[0]["quantity_description"] . "</p>";
-                echo "<p id='price'>$" . $item[0]["price"] . "</p>";
-                echo "</ul>";
-                echo "</div>";
-                echo "</div>";
-                ?>
+                <div class='description-inner-text-container'>
+                    <?php
 
-                <form id="myForm" method="post" action="confirmation.php">
-                    <input type="hidden" name="dish_id" value="<?php echo $item[0]['id_dish_info']; ?>">
-                    <input type="hidden" id="date" name="date">
-                    <input type="hidden" id="time" name="time">
-                    <input type="hidden" id="last_price" name="last_price">
-                    <input type="number" id="amount" name="amount" min="1" value="1">
-                    <input type="submit" value="order">
-                </form>
+                    echo "<h2 class='about-dish-title'>" . $item[0]["dish_lname"] . "</h2>";
+                    echo "<p>" . $item[0]["dish_description"] . "</p>";
+                    echo "<p>Category: " . $item[0]["category_name"] . "</p>";
+                    echo "<p>" . $item[0]["quantity_category_name"] . ": " . $item[0]["quantity_description"] . "</p>";
+                    echo "<p id='price'>$" . $item[0]["price"] . "</p>";
+                    echo "</ul>";
+                    ?>
+
+                    <form id="myForm" method="post" action="confirmation.php">
+                        <input type="hidden" name="dish_id" value="<?php echo $item[0]['id_dish_info']; ?>">
+                        <input type="hidden" id="date" name="date">
+                        <input type="hidden" id="time" name="time">
+                        <input type="hidden" id="last_price" name="last_price">
+                        <div>
+                        <input class="input" type="number" id="amount" name="amount" min="1" value="1">
+                        </div>
+                        <input class="add-cart-buttomc" type="submit" value="order">
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -156,7 +158,7 @@ if ($_GET) {
 
                 console.log('Date: ' + date);
                 console.log('Time: ' + time);
-                console.log('Amount: ' + amount); 
+                console.log('Amount: ' + amount);
                 console.log('Total: ' + total);
                 this.submit();
             });
