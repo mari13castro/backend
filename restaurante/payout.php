@@ -74,6 +74,25 @@ if ($_GET) {
             "id_dish_info[!]" => $_GET["id"]
         ]
     );
+
+    if (isset($_POST["order"])) {
+
+        $validateUsername = $database->select("tb_order_registration", "*", [
+            "usr" => $_POST["username"]
+        ]);
+
+        if (count($validateUsername) > 0) {
+            $message = "This username is already registered";
+        } else {
+            $database->insert("tb_users", [
+                "fullname" => $_POST["fullname"],
+                "usr" => $_POST["username"],
+                "pw" => $pass,
+                "email" => $_POST["email"]
+            ]);
+
+        }
+    }
 }
 
 ?>
@@ -121,7 +140,7 @@ if ($_GET) {
              <option value='express'>Express</option>
             </select>";
         echo "<div class='button-container'>";
-        echo "<buttom id='add-cart-buttom' class='about-cart-button'" . $item[0]["id_dish_info"] . "'>Buy</buttom>";
+        echo "<buttom id='payout' class='about-cart-button'" . $item[0]["id_dish_info"] . "'>Buy</buttom>";
         echo "</div>";
         echo "</div>";
         echo "</div>";
